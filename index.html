@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age calculator</title>
+    <style>
+        /* Basic styling for the page layout */
+        body {
+            font-family: Cursive;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            margin: 0;
+            background-color: #24829A;
+        }
+        .container {
+            text-align: center;
+            background-color: #6ACBCE;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            padding: 10px;
+            margin: 10px;
+            font-size: 20px;
+            font-family: Cursive;
+        }
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+  <up><center><img src="C:\Users\User\Downloads\Logo-Computer-Club.png"width="250" height="250"></up></center>
+
+<div class="container">
+    <h3>I am Masrafi Hossen.I Read in class 9 at Omar Kinder Gerten School.</h3><h3>My Project is Age Calculator. </h3>
+    <h1>Age calculator</h1>
+    <label for="birthDate"><h3>Enter your date of birth:</h3></label><br>
+    <input type="date" id="birthDate"><br>
+    <button onclick="calculateAge()"> Calculate your age</button>
+    <p id="result"></p>
+</div>
+
+<script>
+    function calculateAge() {
+        // Get the user's birth date from the input
+        const birthDate = new Date(document.getElementById("birthDate").value);
+        // Get the current date
+        const today = new Date();
+
+        // Calculate age in years
+        let ageYears = today.getFullYear() - birthDate.getFullYear();
+
+        // Calculate the difference in months and days
+        let ageMonths = today.getMonth() - birthDate.getMonth();
+        let ageDays = today.getDate() - birthDate.getDate();
+
+        // Adjust years if the birth date hasn't been reached this year
+        if (ageMonths < 0 || (ageMonths === 0 && ageDays < 0)) {
+            ageYears--;
+            ageMonths += 12;
+        }
+
+        // Adjust months if birth day hasn't been reached in the current month
+        if (ageDays < 0) {
+            const previousMonth = (today.getMonth() - 1 + 12) % 12;
+            const daysInPreviousMonth = new Date(today.getFullYear(), previousMonth + 1, 0).getDate();
+            ageDays += daysInPreviousMonth;
+            ageMonths--;
+        }
+
+        // Display the age in years, months, and days
+        document.getElementById("result").innerText = `Your age ${ageYears} Years ,${ageMonths} Months,${ageDays} Days,` ;
+    }
+</script>
+
+</body>
+</html>
